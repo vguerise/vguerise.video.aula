@@ -285,8 +285,16 @@
         @media (max-width: 768px) {
             .about-container { grid-template-columns: 1fr; gap: 1.5rem; }
             .about-image { max-width: 160px; margin: 0 auto; }
-            .hero { padding: 3rem 1.5rem 2.5rem; }
+            .hero { padding: 1.5rem 1.2rem; }
+            .hero-headline { font-size: 1.6rem; margin-bottom: 0.6rem; }
+            .hero-subheadline { font-size: 0.95rem; }
+            .video-section { padding: 1.2rem 1rem; }
             .cta-button { padding: 1rem 1.8rem; font-size: 0.95rem; }
+        }
+
+        @media (min-width: 769px) {
+            .hero { padding: 2rem 2rem 1.5rem; }
+            .video-section { padding: 2rem 2rem; }
         }
     </style>
 </head>
@@ -357,8 +365,17 @@
     </footer>
 
     <script>
-        // Trava o scroll ao carregar
-        document.body.classList.add("locked");
+        // Trava o scroll ao carregar e centraliza no vídeo
+        document.body.classList.add('locked');
+        window.scrollTo(0, 0);
+
+        // Centraliza a viewport no vídeo assim que carregar
+        window.addEventListener('load', function() {
+            var videoSection = document.querySelector('.video-section');
+            if (videoSection) {
+                videoSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
 
         var ctaShown = false;
 
