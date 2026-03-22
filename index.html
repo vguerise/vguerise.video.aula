@@ -146,8 +146,6 @@
             50% { box-shadow: 0 0 0 13px rgba(37,211,102,0); }
         }
 
-        .floating-cta { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
-        .floating-cta .cta-button { padding: 0.85rem 1.7rem; font-size: 0.92rem; box-shadow: 0 8px 28px rgba(232,93,4,0.4); }
 
         .live-viewers {
             position: fixed; top: 80px; right: 20px;
@@ -816,8 +814,8 @@
         </div>
     </section>
 
-    <!-- CTA — oculto, aparece no segundo 225 -->
-    <div id="cta-block" style="display:none; background:var(--black-soft); padding:2rem 2rem 3rem; text-align:center;">
+    <!-- CTA ABAIXO DO VÍDEO -->
+    <div id="cta-block" style="display:block; background:var(--black-soft); padding:2rem 2rem 3rem; text-align:center;">
         <div style="max-width:700px; margin:0 auto;">
             <a href="https://pay.hotmart.com/X104571170T?checkoutMode=10" class="cta-button" onclick="fbq('track', 'InitiateCheckout');">Quero parar de cair em conto de vendedor</a>
             <p style="margin-top:1rem; color:rgba(255,255,255,0.45); font-size:0.85rem;">Acesso imediato &nbsp;·&nbsp; Curso 100% online &nbsp;·&nbsp; Garantia de 7 dias</p>
@@ -1246,50 +1244,7 @@
         <p>Desenvolvido com dedicação para homens que querem dominar a perfumaria.</p>
     </footer>
 
-    <!-- FLOATING CTA -->
-    <div class="floating-cta">
-        <a href="https://pay.hotmart.com/X104571170T?checkoutMode=10" class="cta-button" onclick="fbq('track', 'InitiateCheckout');">Chega de comprar perfume errado</a>
-    </div>
-
     <script>
-        // CTA aparece no segundo 225
-        var ctaShown = false;
-
-        function showCTA() {
-            if (ctaShown) return;
-            ctaShown = true;
-            var ctaBlock = document.getElementById('cta-block');
-            if (!ctaBlock) return;
-            ctaBlock.style.display = 'block';
-            ctaBlock.style.animation = 'fadeInUp 0.6s ease';
-        }
-
-        function checkVideoTime() {
-            try {
-                var player = document.getElementById('vid-69bd85ff891545b57a98b207');
-                if (!player) return;
-                var t = player.currentTime
-                    || (player.player && player.player.currentTime)
-                    || (player.getPlayer && player.getPlayer() && player.getPlayer().currentTime)
-                    || 0;
-                if (t >= 225) showCTA();
-            } catch(e) {}
-        }
-
-        window.addEventListener('message', function(e) {
-            try {
-                var data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
-                if (!data) return;
-                var t = data.currentTime || data.time || data.position || 0;
-                if (t >= 225) showCTA();
-            } catch(e) {}
-        });
-
-        document.addEventListener('timeupdate', function(e) {
-            try { if (e.detail && e.detail.currentTime >= 225) showCTA(); } catch(e) {}
-        });
-
-        setInterval(checkVideoTime, 1000);
 
         // FAQ Accordion
         document.querySelectorAll('.faq-question').forEach(q => {
@@ -1313,15 +1268,6 @@
             });
         });
 
-        // Hide floating CTA near footer
-        window.addEventListener('scroll', () => {
-            const fc = document.querySelector('.floating-cta');
-            const footer = document.querySelector('footer');
-            if (!footer) return;
-            const show = (window.scrollY + window.innerHeight) <= (footer.offsetTop - 100);
-            fc.style.opacity = show ? '1' : '0';
-            fc.style.pointerEvents = show ? 'auto' : 'none';
-        });
 
         document.addEventListener('DOMContentLoaded', function() {
             // Pain cards
