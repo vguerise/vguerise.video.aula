@@ -338,6 +338,12 @@
     </footer>
 
     <script>
+        // Scroll automático para o vídeo ao carregar
+        window.addEventListener('load', function() {
+            const video = document.querySelector('.video-section');
+            if (video) video.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
         // CTA aparece após 10 segundos com fade
         setTimeout(function() {
             const cta = document.getElementById('cta-block');
